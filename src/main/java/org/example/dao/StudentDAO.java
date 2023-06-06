@@ -45,16 +45,38 @@ public class StudentDAO extends GenericDAO<Student> {
         return null;
     }
 
+    public Student getByName(String name) {
+        String query = "SELECT * FROM student WHERE student_name = ?";
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("student_id");
+                int admissionYear = resultSet.getInt("admission_year");
+                int departmentId = resultSet.getInt("department_id");
+                String departmentName = resultSet.getString("department_name");
+                return new Student(name, admissionYear, departmentId, departmentName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
-    public void update(Student student) throws SQLException {
+    public void update(Student student) {
         String sql = "UPDATE student SET student_name = ?, admission_year = ?, department_id = ?, department_name = ? WHERE student_id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, student.getStudentName());
             statement.setInt(2, student.getAdmissionYear());
             statement.setInt(3, student.getDepartmentId());
             statement.setString(4, student.getDepartmentName());
             statement.setInt(5, student.getStudentId());
             statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
