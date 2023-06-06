@@ -7,12 +7,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDAO {
+public class CourseDAO extends GenericDAO<Course> {
+
+    @Override
     public void create(Course course) {
         String query = "INSERT INTO course (course_name, credits, semester_id, instructor_id, department_id, classroom_id, description) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, course.getCourseName());
             statement.setInt(2, course.getCredits());
             statement.setInt(3, course.getSemesterId());
@@ -20,12 +22,20 @@ public class CourseDAO {
             statement.setInt(5, course.getDepartmentId());
             statement.setInt(6, course.getClassroomId());
             statement.setString(7, course.getDescription());
+
             statement.executeUpdate();
+
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int courseId = generatedKeys.getInt(1);
+                course.setCourseId(courseId);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    @Override
     public Course getById(int id) {
         String query = "SELECT * FROM course WHERE course_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -40,7 +50,9 @@ public class CourseDAO {
                 int departmentId = resultSet.getInt("department_id");
                 int classroomId = resultSet.getInt("classroom_id");
                 String description = resultSet.getString("description");
-                return new Course(id, courseName, credits, semesterId, instructorId, departmentId, classroomId, description);
+                Course course = new Course(courseName, credits, semesterId, instructorId, departmentId, classroomId, description);
+                course.setCourseId(id);
+                return course;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,6 +60,7 @@ public class CourseDAO {
         return null;
     }
 
+    @Override
     public void update(Course course) {
         String sql = "UPDATE course SET course_name = ?, credits = ?, semester_id = ?, instructor_id = ?, department_id = ?, classroom_id = ?, description = ? WHERE course_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -66,6 +79,7 @@ public class CourseDAO {
         }
     }
 
+    @Override
     public void delete(int id) {
         String query = "DELETE FROM course WHERE course_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -77,6 +91,7 @@ public class CourseDAO {
         }
     }
 
+    @Override
     public List<Course> getAll() {
         List<Course> courses = new ArrayList<>();
         String query = "SELECT * FROM course";
@@ -84,7 +99,7 @@ public class CourseDAO {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
             while (resultSet.next()) {
-                int id = resultSet.getInt("course_id");
+                int courseId = resultSet.getInt("course_id");
                 String courseName = resultSet.getString("course_name");
                 int credits = resultSet.getInt("credits");
                 int semesterId = resultSet.getInt("semester_id");
@@ -92,7 +107,9 @@ public class CourseDAO {
                 int departmentId = resultSet.getInt("department_id");
                 int classroomId = resultSet.getInt("classroom_id");
                 String description = resultSet.getString("description");
-                courses.add(new Course(id, courseName, credits, semesterId, instructorId, departmentId, classroomId, description));
+                Course course = new Course(courseName, credits, semesterId, instructorId, departmentId, classroomId, description);
+                course.setCourseId(courseId);
+                courses.add(course);
             }
         } catch (SQLException e) {
             e.printStackTrace();
