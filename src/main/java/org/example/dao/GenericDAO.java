@@ -2,8 +2,11 @@ package org.example.dao;
 
 import org.example.util.ConnectionPool;
 
+import java.util.List;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class GenericDAO<T> {
     protected Connection connection;
@@ -32,5 +35,11 @@ public abstract class GenericDAO<T> {
 
     public void delete(int id) {
         // delete
+    }
+
+    public List<T> getAll() {
+        List<T> entities = new ArrayList<>();
+        // retrieve all entities from the database
+        return entities;
     }
 }
