@@ -39,7 +39,7 @@ public abstract class GenericDAO<T> {
 
     public List<T> getAll() {
         List<T> entities = new ArrayList<>();
-        // retrieve all entities from the database
+        // retrieve all fromdatabase
         return entities;
     }
 }
