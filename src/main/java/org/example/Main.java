@@ -35,10 +35,11 @@ public class Main {
             // Iterate over the student data and insert/update records in the database
             for (int i = 0; i < studentList.getLength(); i++) {
                 Element studentElement = (Element) studentList.item(i);
-                String studentName = studentElement.getAttribute("student_name");
-                int admissionYear = Integer.parseInt(studentElement.getAttribute("admission_year"));
-                int departmentId = Integer.parseInt(studentElement.getAttribute("department_id"));
-                String departmentName = studentElement.getAttribute("department_name");
+                String studentName = studentElement.getElementsByTagName("student_name").item(0).getTextContent();
+                int admissionYear = Integer.parseInt(studentElement.getElementsByTagName("admission_year").item(0).getTextContent());
+                int departmentId = Integer.parseInt(studentElement.getElementsByTagName("department_id").item(0).getTextContent());
+                String departmentName = studentElement.getElementsByTagName("department_name").item(0).getTextContent();
+
 
                 // Perform database operations (insert/update) based on your requirements
                 // Use PreparedStatement to prevent SQL injection
