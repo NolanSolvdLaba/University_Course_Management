@@ -2,12 +2,14 @@
 <students>
     <student>
         <name>John Doe</name>
-        <age>20</age>
-        <major>Computer Science</major>
+        <admission_year>2021</admission_year>
+        <department_id>1</department_id>
+        <department_name>Computer Science</department_name>
     </student>
     <student>
         <name>Jane Smith</name>
-        <age>22</age>
-        <major>Electrical Engineering</major>
+        <admission_year>2022</admission_year>
+        <department_id>2</department_id>
+        <department_name>Electrical Engineering</department_name>
     </student>
 </students>
