@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<courses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="course.xsd">
+    <course>
+        <course_name>Advanced Programming</course_name>
+        <credits>3</credits>
+        <semester_id>1</semester_id>
+        <instructor_id>1</instructor_id>
+        <department_id>2</department_id>
+        <classroom_id>1</classroom_id>
+        <description>Advanced programming concepts and techniques</description>
+    </course>
+    <course>
+        <course_name>Data Structures</course_name>
+        <credits>4</credits>
+        <semester_id>2</semester_id>
+        <instructor_id>2</instructor_id>
+        <department_id>2</department_id>
+        <classroom_id>3</classroom_id>
+        <description>Introduction to data structures and algorithms</description>
+    </course>
+    <!-- Add more courses as needed -->
+</courses>
