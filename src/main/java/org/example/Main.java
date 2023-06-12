@@ -1,9 +1,5 @@
 package org.example;
 
-import org.example.model.Student;
-import org.example.model.Course;
-import org.example.service.StudentService;
-import org.example.service.CourseService;
 import org.example.util.ConnectionPool;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,46 +9,42 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            // Parse the XML file and retrieve the student data
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new File("C:\\Users\\Nolan\\IdeaProjects\\University_Course_Management\\src\\main\\resources\\student.xml"));
+            Document document = builder.parse(new File("C:\\Users\\Nolan\\IdeaProjects\\University_Course_Management\\src\\main\\resources\\course\\course.xml"));
 
             Element root = document.getDocumentElement();
-            NodeList studentList = root.getElementsByTagName("student");
+            NodeList courseList = root.getElementsByTagName("course");
 
-            // Establish a connection to the MySQL database
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/univcoursemgmt", "root", "password");
+            Connection connection = ConnectionPool.getConnection();
 
-            // Iterate over the student data and insert/update records in the database
-            for (int i = 0; i < studentList.getLength(); i++) {
-                Element studentElement = (Element) studentList.item(i);
-                String studentName = studentElement.getElementsByTagName("student_name").item(0).getTextContent();
-                int admissionYear = Integer.parseInt(studentElement.getElementsByTagName("admission_year").item(0).getTextContent());
-                int departmentId = Integer.parseInt(studentElement.getElementsByTagName("department_id").item(0).getTextContent());
-                String departmentName = studentElement.getElementsByTagName("department_name").item(0).getTextContent();
+            for (int i = 0; i < courseList.getLength(); i++) {
+                Element courseElement = (Element) courseList.item(i);
+                String courseName = courseElement.getElementsByTagName("course_name").item(0).getTextContent();
+                int credits = Integer.parseInt(courseElement.getElementsByTagName("credits").item(0).getTextContent());
+                int semesterId = Integer.parseInt(courseElement.getElementsByTagName("semester_id").item(0).getTextContent());
+                int instructorId = Integer.parseInt(courseElement.getElementsByTagName("instructor_id").item(0).getTextContent());
+                int departmentId = Integer.parseInt(courseElement.getElementsByTagName("department_id").item(0).getTextContent());
+                int classroomId = Integer.parseInt(courseElement.getElementsByTagName("classroom_id").item(0).getTextContent());
+                String description = courseElement.getElementsByTagName("description").item(0).getTextContent();
 
-
-                // Perform database operations (insert/update) based on your requirements
-                // Use PreparedStatement to prevent SQL injection
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO student (student_name, admission_year, department_id, department_name) VALUES (?, ?, ?, ?)");
-                statement.setString(1, studentName);
-                statement.setInt(2, admissionYear);
-                statement.setInt(3, departmentId);
-                statement.setString(4, departmentName);
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO course (course_name, credits, semester_id, instructor_id, department_id, classroom_id, description) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                statement.setString(1, courseName);
+                statement.setInt(2, credits);
+                statement.setInt(3, semesterId);
+                statement.setInt(4, instructorId);
+                statement.setInt(5, departmentId);
+                statement.setInt(6, classroomId);
+                statement.setString(7, description);
                 statement.executeUpdate();
                 statement.close();
             }
 
-            // Close the database connection
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
