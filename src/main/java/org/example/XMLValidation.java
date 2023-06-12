@@ -6,8 +6,8 @@ import java.io.*;
 
 public class XMLValidation {
     public static void main(String[] args) {
-        String xmlFilePath = "student.xml";
-        String xsdFilePath = "student.xsd";
+        String xmlFilePath = "student/student.xml";
+        String xsdFilePath = "student/student.xsd";
 
         // Validate the XML file against the XSD schema
         boolean isValid = validateXMLSchema(xmlFilePath, xsdFilePath);
