@@ -1,0 +1,14 @@
+<semesters>
+    <semester>
+        <semester_id>1</semester_id>
+        <semester_name>Fall</semester_name>
+        <start_date>2023-09-01</start_date>
+        <end_date>2023-12-31</end_date>
+    </semester>
+    <semester>
+        <semester_id>2</semester_id>
+        <semester_name>Spring</semester_name>
+        <start_date>2024-01-01</start_date>
+        <end_date>2024-04-30</end_date>
+    </semester>
+</semesters>

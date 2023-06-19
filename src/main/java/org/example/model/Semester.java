@@ -1,17 +1,17 @@
 package org.example.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Semester {
     private int semesterId;
     private String semesterName;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public Semester() {
     }
 
-    public Semester(String semesterName, Date startDate, Date endDate) {
+    public Semester(String semesterName, LocalDate startDate, LocalDate endDate) {
         this.semesterName = semesterName;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -33,19 +33,19 @@ public class Semester {
         this.semesterName = semesterName;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

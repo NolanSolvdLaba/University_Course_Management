@@ -4,6 +4,7 @@ import org.example.model.Semester;
 import org.example.util.ConnectionPool;
 
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,13 @@ public class SemesterDAO extends GenericDAO<Semester> {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, semester.getSemesterName());
-            statement.setDate(2, java.sql.Date.valueOf(semester.getStartDate()));
-            statement.setDate(3, java.sql.Date.valueOf(semester.getEndDate()));
+
+            // Convert LocalDate to java.sql.Date
+            java.sql.Date startDate = java.sql.Date.valueOf(semester.getStartDate());
+            java.sql.Date endDate = java.sql.Date.valueOf(semester.getEndDate());
+
+            statement.setDate(2, startDate);
+            statement.setDate(3, endDate);
 
             statement.executeUpdate();
 
@@ -30,6 +36,7 @@ public class SemesterDAO extends GenericDAO<Semester> {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public Semester getById(int id) {
