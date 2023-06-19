@@ -38,6 +38,7 @@ public class DepartmentDAO extends GenericDAO<Department> {
             if (resultSet.next()) {
                 String departmentName = resultSet.getString("department_name");
                 Department department = new Department(departmentName);
+                department.setDepartmentId(id);
                 return department;
             }
         } catch (SQLException e) {
@@ -52,6 +53,7 @@ public class DepartmentDAO extends GenericDAO<Department> {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, department.getDepartmentName());
+            statement.setInt(2, department.getDepartmentId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,8 +80,10 @@ public class DepartmentDAO extends GenericDAO<Department> {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
             while (resultSet.next()) {
+                int departmentId = resultSet.getInt("department_id");
                 String departmentName = resultSet.getString("department_name");
                 Department department = new Department(departmentName);
+                department.setDepartmentId(departmentId);
                 departments.add(department);
             }
         } catch (SQLException e) {
