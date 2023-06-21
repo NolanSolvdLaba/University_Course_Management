@@ -29,21 +29,21 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        try {
-            File file = new File("src/main/resources/jaxbFiles/grade.xml");
-            JAXBContext jaxbContext = JAXBContext.newInstance(Grades.class);
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Grades grade = (Grades) jaxbUnmarshaller.unmarshal(file);
-
-            //Accessing the parsed object
-            System.out.println("Grade ID: " + grade.getGradeId());
-            System.out.println("Enrollment ID: " + grade.getEnrollmentId());
-            System.out.println("Grade: " + grade.getGrade());
-            System.out.println("Course ID: " + grade.getCourseId());
-            System.out.println("Student ID: " + grade.getStudentId());
-
-        } catch (JAXBException e){
-            e.printStackTrace();
-        }
+//        try {
+//            File file = new File("src/main/resources/jaxbFiles/grade.xml");
+//            JAXBContext jaxbContext = JAXBContext.newInstance(Grades.class);
+//            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+//            Grades grade = (Grades) jaxbUnmarshaller.unmarshal(file);
+//
+//            //Accessing the parsed object
+//            System.out.println("Grade ID: " + grade.getGradeId());
+//            System.out.println("Enrollment ID: " + grade.getEnrollmentId());
+//            System.out.println("Grade: " + grade.getGrade());
+//            System.out.println("Course ID: " + grade.getCourseId());
+//            System.out.println("Student ID: " + grade.getStudentId());
+//
+//        } catch (JAXBException e){
+//            e.printStackTrace();
+//        }
     }
 }
