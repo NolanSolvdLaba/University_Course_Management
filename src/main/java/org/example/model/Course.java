@@ -1,5 +1,6 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -10,7 +11,8 @@ import javax.xml.bind.annotation.*;
 @JsonRootName("Course")
 public class Course {
 
-    @JsonProperty("courseId")
+    @JsonIgnore
+    @XmlTransient
     private int courseId;
 
     @XmlElement(name = "course_name")

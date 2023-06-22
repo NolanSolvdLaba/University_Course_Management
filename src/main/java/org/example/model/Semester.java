@@ -1,6 +1,7 @@
 package org.example.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.example.util.DateAdapter;
 
 import javax.xml.bind.annotation.*;
@@ -15,6 +16,9 @@ import java.time.LocalDate;
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonRootName("Semester")
 public class Semester {
+
+    @JsonIgnore
+    @XmlTransient
     private int semesterId;
 
     @XmlElement(name="semesterName")
@@ -28,7 +32,6 @@ public class Semester {
     @XmlJavaTypeAdapter(DateAdapter.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-
 
     public Semester(String semesterName, LocalDate startDate, LocalDate endDate) {
         this.semesterName = semesterName;

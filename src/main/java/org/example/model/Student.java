@@ -1,5 +1,6 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,6 +13,9 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonRootName("Student")
 public class Student {
+
+    @JsonIgnore
+    @XmlTransient
     private int studentId;
 
     @XmlElement(name = "studentName")
