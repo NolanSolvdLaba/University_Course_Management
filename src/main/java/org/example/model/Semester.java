@@ -20,8 +20,6 @@ public class Semester {
     @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDate endDate;
 
-    public Semester() {
-    }
 
     public Semester(String semesterName, LocalDate startDate, LocalDate endDate) {
         this.semesterName = semesterName;

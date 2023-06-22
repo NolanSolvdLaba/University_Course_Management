@@ -1,5 +1,7 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
@@ -23,17 +25,18 @@ public class Student {
 
     @XmlElementWrapper(name = "courses")
     @XmlElement(name = "course")
+    @JsonProperty("courses")
     private List<Course> courses;
+
 
     public Student() {
     }
 
-    public Student(String studentName, int admissionYear, int departmentId, String departmentName, List<Course> courses) {
+    public Student(String studentName, int admissionYear, int departmentId, String departmentName) {
         this.studentName = studentName;
         this.admissionYear = admissionYear;
         this.departmentId = departmentId;
         this.departmentName = departmentName;
-        this.courses = courses;
     }
 
     public int getStudentId() {
