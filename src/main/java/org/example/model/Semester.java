@@ -1,15 +1,28 @@
 package org.example.model;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+import org.example.util.DateAdapter;
+
+@XmlRootElement(name = "semester")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Semester {
+    @XmlAttribute(name = "semester_id")
     private int semesterId;
+
+    @XmlElement(name = "semester_name")
     private String semesterName;
+
+    @XmlElement(name = "start_date")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDate startDate;
+
+    @XmlElement(name = "end_date")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDate endDate;
 
-    public Semester() {
-    }
 
     public Semester(String semesterName, LocalDate startDate, LocalDate endDate) {
         this.semesterName = semesterName;

@@ -1,20 +1,27 @@
 package org.example;
 
-import org.example.model.Department;
-import org.example.model.jaxb.Grades;
-import org.example.service.DepartmentService;
-import org.example.util.ConnectionPool;
+import org.example.model.Classroom;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.sql.Connection;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        try {
+            Classroom classroom = new Classroom(10, "101", 30);
+
+            File file = new File("src/main/resources/jaxbFiles/classroom.xml");
+
+            JAXBContext jaxbContext = JAXBContext.newInstance(Classroom.class);
+            Marshaller marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(classroom, file);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
 //        try {
 //            Grades grade = new Grades(20, 10, "97", 1, 1);
 //
@@ -45,5 +52,7 @@ public class Main {
 //        } catch (JAXBException e){
 //            e.printStackTrace();
 //        }
+
+
     }
 }

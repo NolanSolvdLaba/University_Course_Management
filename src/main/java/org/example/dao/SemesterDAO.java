@@ -19,8 +19,8 @@ public class SemesterDAO extends GenericDAO<Semester> {
             statement.setString(1, semester.getSemesterName());
 
             // Convert LocalDate to java.sql.Date
-            java.sql.Date startDate = java.sql.Date.valueOf(semester.getStartDate());
-            java.sql.Date endDate = java.sql.Date.valueOf(semester.getEndDate());
+            Date startDate = Date.valueOf(semester.getStartDate());
+            Date endDate = Date.valueOf(semester.getEndDate());
 
             statement.setDate(2, startDate);
             statement.setDate(3, endDate);

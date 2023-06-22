@@ -1,4 +1,4 @@
-package org.example.model.jaxb;
+package org.example.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
