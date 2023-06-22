@@ -48,7 +48,7 @@ public class ClassroomDAO {
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, classroom.getClassroomNumber());
             statement.setInt(2, classroom.getCapacity());
-            statement.setInt(3, classroom.getClassroomID());
+            statement.setInt(3, classroom.getClassroomId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,22 +1,20 @@
 package org.example.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "Instructor")
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonRootName("Instructor")
 public class Instructor {
-    @XmlAttribute(name = "instructorId")
+
     private int instructorId;
 
     @XmlElement(name = "instructorName")
     @JsonProperty("instructorName")
     private String instructorName;
-
-    public Instructor() {
-    }
-
     public Instructor(String instructorName) {
         this.instructorName = instructorName;
     }

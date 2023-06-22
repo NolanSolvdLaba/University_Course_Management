@@ -1,37 +1,45 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "course")
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonRootName("Course")
 public class Course {
 
-    @XmlAttribute(name = "course_id")
+    @JsonProperty("courseId")
     private int courseId;
 
     @XmlElement(name = "course_name")
+    @JsonProperty("courseName")
     private String courseName;
 
     @XmlElement(name = "credits")
+    @JsonProperty("credits")
     private int credits;
 
     @XmlElement(name = "semester_id")
+    @JsonProperty("semesterId")
     private int semesterId;
 
     @XmlElement(name = "instructor_id")
+    @JsonProperty("instructorId")
     private int instructorId;
 
     @XmlElement(name = "department_id")
+    @JsonProperty("departmentId")
     private int departmentId;
 
     @XmlElement(name = "classroom_id")
+    @JsonProperty("classroomId")
     private int classroomId;
 
     @XmlElement(name = "description")
+    @JsonProperty("description")
     private String description;
-
-    public Course() {
-    }
 
     public Course(String courseName, int credits, int semesterId, int instructorId, int departmentId, int classroomId, String description) {
         this.courseName = courseName;

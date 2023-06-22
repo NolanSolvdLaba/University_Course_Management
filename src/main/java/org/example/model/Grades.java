@@ -1,32 +1,33 @@
 package org.example.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "grade")
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonRootName("Grades")
 public class Grades {
 
-    @XmlElement
     private int gradeId;
 
-    @XmlElement
+    @XmlElement(name="enrollmentId")
+    @JsonProperty("instructorId")
     private int enrollmentId;
 
-    @XmlElement
+    @XmlElement(name="grade")
+    @JsonProperty("grade")
     private String grade;
 
-    @XmlElement
+    @XmlElement(name="courseId")
+    @JsonProperty("courseId")
     private int courseId;
 
-    @XmlElement
+    @XmlElement(name="studentId")
+    @JsonProperty("studentId")
     private int studentId;
 
-    // Constructors
-    public Grades() {
-    }
 
     public Grades(int gradeId, int enrollmentId, String grade, int courseId, int studentId) {
         this.gradeId = gradeId;
@@ -36,7 +37,6 @@ public class Grades {
         this.studentId = studentId;
     }
 
-    // Getters and Setters
     public int getGradeId() {
         return gradeId;
     }

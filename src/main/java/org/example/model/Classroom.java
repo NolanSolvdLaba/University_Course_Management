@@ -1,35 +1,38 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "classroom")
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonRootName("Classroom")
 public class Classroom {
 
-    @XmlAttribute(name = "classroom_id")
-    private int classroomID;
+    @JsonProperty("classroomId")
+    private int classroomId;
 
     @XmlElement(name = "classroom_number")
+    @JsonProperty("classroomNumber")
     private String classroomNumber;
 
     @XmlElement(name = "capacity")
+    @JsonProperty("capacity")
     private int capacity;
 
-    public Classroom() {
-    }
-
-    public Classroom(int classroomID, String classroomNumber, int capacity) {
-        this.classroomID = classroomID;
+    public Classroom(int classroomId, String classroomNumber, int capacity) {
+        this.classroomId = classroomId;
         this.classroomNumber = classroomNumber;
         this.capacity = capacity;
     }
 
-    public int getClassroomID() {
-        return classroomID;
+    public int getClassroomId() {
+        return classroomId;
     }
 
-    public void setClassroomID(int classroomID) {
-        this.classroomID = classroomID;
+    public void setClassroomId(int classroomId) {
+        this.classroomId = classroomId;
     }
 
     public String getClassroomNumber() {
