@@ -6,30 +6,28 @@ import java.time.LocalDate;
 
 import org.example.util.DateAdapter;
 
-@XmlRootElement(name = "semester")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Semester {
-    @XmlAttribute(name = "semester_id")
     private int semesterId;
 
-    @XmlElement(name = "semester_name")
+    @XmlElement
     private String semesterName;
 
-    @XmlElement(name = "start_date")
     @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDate startDate;
 
-    @XmlElement(name = "end_date")
     @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDate endDate;
 
+    public Semester() {
+    }
 
     public Semester(String semesterName, LocalDate startDate, LocalDate endDate) {
         this.semesterName = semesterName;
         this.startDate = startDate;
         this.endDate = endDate;
     }
-
     public int getSemesterId() {
         return semesterId;
     }

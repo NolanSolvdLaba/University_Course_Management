@@ -1,3 +1,5 @@
+package org.example.util;
+
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
