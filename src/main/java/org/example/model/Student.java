@@ -1,17 +1,39 @@
 package org.example.model;
 
+import javax.xml.bind.annotation.*;
+import java.util.List;
+
+@XmlRootElement(name = "Student")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
+    @XmlElement(name = "studentId")
     private int studentId;
+
+    @XmlElement(name = "studentName")
     private String studentName;
+
+    @XmlElement(name = "admissionYear")
     private int admissionYear;
+
+    @XmlElement(name = "departmentId")
     private int departmentId;
+
+    @XmlElement(name = "departmentName")
     private String departmentName;
 
-    public Student(String studentName, int admissionYear, int departmentId, String departmentName) {
+    @XmlElementWrapper(name = "courses")
+    @XmlElement(name = "course")
+    private List<Course> courses;
+
+    public Student() {
+    }
+
+    public Student(String studentName, int admissionYear, int departmentId, String departmentName, List<Course> courses) {
         this.studentName = studentName;
         this.admissionYear = admissionYear;
         this.departmentId = departmentId;
         this.departmentName = departmentName;
+        this.courses = courses;
     }
 
     public int getStudentId() {
@@ -52,5 +74,13 @@ public class Student {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }
