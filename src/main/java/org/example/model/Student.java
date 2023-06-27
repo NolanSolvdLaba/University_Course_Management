@@ -12,7 +12,7 @@ import java.util.List;
 @XmlRootElement(name = "Student")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonRootName("Student")
-public class Student {
+public class Student extends User {
 
     @JsonIgnore
     @XmlTransient
@@ -38,6 +38,10 @@ public class Student {
     @XmlElement(name = "course")
     @JsonProperty("courses")
     private List<Course> courses;
+
+    public Student() {
+        // Default constructor
+    }
 
     public Student(String studentName, int admissionYear, int departmentId, String departmentName) {
         this.studentName = studentName;
