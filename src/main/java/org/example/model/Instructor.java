@@ -18,6 +18,11 @@ public class Instructor {
     @XmlElement(name = "instructorName")
     @JsonProperty("instructorName")
     private String instructorName;
+
+    public Instructor(){
+
+    };
+
     public Instructor(String instructorName) {
         this.instructorName = instructorName;
     }
@@ -37,6 +42,7 @@ public class Instructor {
     public void setInstructorName(String instructorName) {
         this.instructorName = instructorName;
     }
+
 
     @Override
     public String toString() {
