@@ -1,14 +1,14 @@
 package org.example.service;
 
-import org.example.dao.CourseDAO;
+import org.example.dao.CourseMapper;
 import org.example.model.Course;
 
 import java.util.List;
 
 public class CourseService {
-    private final CourseDAO courseDAO;
+    private final CourseMapper courseDAO;
 
-    public CourseService(CourseDAO courseDAO) {
+    public CourseService(CourseMapper courseDAO) {
         this.courseDAO = courseDAO;
     }
 

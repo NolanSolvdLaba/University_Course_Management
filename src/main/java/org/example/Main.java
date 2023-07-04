@@ -1,80 +1,45 @@
 package org.example;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import org.example.model.Classroom;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.example.dao.CourseMapper;
+import org.example.model.Course;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
         try {
-            //new classroom instance
-            Classroom classroom = new Classroom(11, "A101", 30);
+            // Load MyBatis configuration file
+            String resource = "mybatis-config.xml";
+            InputStream inputStream = Resources.getResourceAsStream(resource);
+            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
-            //instance of object mapper
-            ObjectMapper objectMapper = new ObjectMapper();
+            // Create a new session
+            try (SqlSession session = sqlSessionFactory.openSession()) {
+                // Get the mapper interface
+                CourseMapper courseMapper = session.getMapper(CourseMapper.class);
 
-            //print nicely
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                // Create a new course
+                Course course = new Course();
+                course.setCourseName("Mathematics");
+                course.setCredits(3);
 
-            //write to file
-            objectMapper.writeValue(new File("src/main/resources/JSONfiles/classroom.json"), classroom);
-            System.out.println("JSON file created");
+                // Insert the course
+                courseMapper.create(course);
+
+                // Retrieve all courses
+                List<Course> courses = courseMapper.getAll();
+                for (Course c : courses) {
+                    System.out.println(c);
+                }
+            }
         } catch (IOException e) {
-             e.printStackTrace();
+            e.printStackTrace();
         }
-
-
-//        try {
-//            Classroom classroom = new Classroom(10, "101", 30);
-//
-//            File file = new File("src/main/resources/jaxbFiles/classroom.xml");
-//
-//            JAXBContext jaxbContext = JAXBContext.newInstance(Classroom.class);
-//            Marshaller marshaller = jaxbContext.createMarshaller();
-//            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//            marshaller.marshal(classroom, file);
-//        } catch (JAXBException e) {
-//            e.printStackTrace();
-//        }
-
-//        try {
-//            Grades grade = new Grades(20, 10, "97", 1, 1);
-//
-//            File file = new File("src/main/resources/jaxbFiles/grade.xml");
-//            JAXBContext jaxbContext = JAXBContext.newInstance(Grades.class);
-//            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-//            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//            jaxbMarshaller.marshal(grade, file);
-//            jaxbMarshaller.marshal(grade, System.out);
-//
-//        } catch (JAXBException e) {
-//            e.printStackTrace();
-//        }
-
-//        try {
-//            File file = new File("src/main/resources/jaxbFiles/grade.xml");
-//            JAXBContext jaxbContext = JAXBContext.newInstance(Grades.class);
-//            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//            Grades grade = (Grades) jaxbUnmarshaller.unmarshal(file);
-//
-//            //Accessing the parsed object
-//            System.out.println("Grade ID: " + grade.getGradeId());
-//            System.out.println("Enrollment ID: " + grade.getEnrollmentId());
-//            System.out.println("Grade: " + grade.getGrade());
-//            System.out.println("Course ID: " + grade.getCourseId());
-//            System.out.println("Student ID: " + grade.getStudentId());
-//
-//        } catch (JAXBException e){
-//            e.printStackTrace();
-//        }
-
-
     }
 }

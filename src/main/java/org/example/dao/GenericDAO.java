@@ -1,45 +1,49 @@
 package org.example.dao;
 
-import org.example.util.ConnectionPool;
+import org.apache.ibatis.session.SqlSession;
+import org.example.util.MyBatisUtil;
 
 import java.util.List;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 public abstract class GenericDAO<T> {
-    protected Connection connection;
+    protected SqlSession sqlSession;
 
     public GenericDAO() {
-        try {
-            connection = ConnectionPool.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // connection exception
-        }
+        sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
     }
 
     public void create(T entity) {
-        // create
+        sqlSession.insert(getCreateQuery(), entity);
+        sqlSession.commit();
     }
 
     public T getById(int id) {
-        // operation by ID
-        return null;
+        return sqlSession.selectOne(getGetByIdQuery(), id);
     }
 
     public void update(T entity) {
-        // update
+        sqlSession.update(getUpdateQuery(), entity);
+        sqlSession.commit();
     }
 
     public void delete(int id) {
-        // delete
+        sqlSession.delete(getDeleteQuery(), id);
+        sqlSession.commit();
     }
 
     public List<T> getAll() {
-        List<T> entities = new ArrayList<>();
-        // retrieve all fromdatabase
-        return entities;
+        return sqlSession.selectList(getGetAllQuery());
     }
+
+    // Abstract methods to be implemented by subclasses
+
+    protected abstract String getCreateQuery();
+
+    protected abstract String getGetByIdQuery();
+
+    protected abstract String getUpdateQuery();
+
+    protected abstract String getDeleteQuery();
+
+    protected abstract String getGetAllQuery();
 }

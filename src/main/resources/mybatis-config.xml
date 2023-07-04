@@ -8,9 +8,9 @@
             <dataSource type="POOLED">
                 <!-- Specify your database connection details -->
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/your_database" />
-                <property name="username" value="your_username" />
-                <property name="password" value="your_password" />
+                <property name="url" value="jdbc:mysql://localhost:3306/univcoursemgmt" />
+                <property name="username" value="root" />
+                <property name="password" value="password" />
             </dataSource>
         </environment>
     </environments>
