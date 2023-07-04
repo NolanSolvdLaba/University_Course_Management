@@ -8,8 +8,8 @@ import java.util.List;
 public class CourseService {
     private final CourseDAO courseDAO;
 
-    public CourseService() {
-        this.courseDAO = new CourseDAO();
+    public CourseService(CourseDAO courseDAO) {
+        this.courseDAO = courseDAO;
     }
 
     public void create(Course course) {
