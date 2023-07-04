@@ -9,9 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SemesterDAO extends GenericDAO<Semester> {
+public class SemesterDAO {
 
-    @Override
     public void create(Semester semester) {
         String query = "INSERT INTO semester (semester_name, start_date, end_date) VALUES (?, ?, ?)";
         try (Connection connection = ConnectionPool.getConnection();
@@ -38,7 +37,6 @@ public class SemesterDAO extends GenericDAO<Semester> {
     }
 
 
-    @Override
     public Semester getById(int id) {
         String query = "SELECT * FROM semester WHERE semester_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -59,7 +57,6 @@ public class SemesterDAO extends GenericDAO<Semester> {
         return null;
     }
 
-    @Override
     public void update(Semester semester) {
         String sql = "UPDATE semester SET semester_name = ?, start_date = ?, end_date = ? WHERE semester_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -74,7 +71,6 @@ public class SemesterDAO extends GenericDAO<Semester> {
         }
     }
 
-    @Override
     public void delete(int id) {
         String query = "DELETE FROM semester WHERE semester_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -86,7 +82,6 @@ public class SemesterDAO extends GenericDAO<Semester> {
         }
     }
 
-    @Override
     public List<Semester> getAll() {
         List<Semester> semesters = new ArrayList<>();
         String query = "SELECT * FROM semester";

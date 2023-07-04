@@ -7,9 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartmentDAO extends GenericDAO<Department> {
+public class DepartmentDAO {
 
-    @Override
     public void create(Department department) {
         String query = "INSERT INTO department (department_name) VALUES (?)";
         try (Connection connection = ConnectionPool.getConnection();
@@ -28,7 +27,6 @@ public class DepartmentDAO extends GenericDAO<Department> {
         }
     }
 
-    @Override
     public Department getById(int id) {
         String query = "SELECT * FROM department WHERE department_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -47,7 +45,6 @@ public class DepartmentDAO extends GenericDAO<Department> {
         return null;
     }
 
-    @Override
     public void update(Department department) {
         String sql = "UPDATE department SET department_name = ? WHERE department_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -60,7 +57,6 @@ public class DepartmentDAO extends GenericDAO<Department> {
         }
     }
 
-    @Override
     public void delete(int id) {
         String query = "DELETE FROM department WHERE department_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -72,7 +68,6 @@ public class DepartmentDAO extends GenericDAO<Department> {
         }
     }
 
-    @Override
     public List<Department> getAll() {
         List<Department> departments = new ArrayList<>();
         String query = "SELECT * FROM department";

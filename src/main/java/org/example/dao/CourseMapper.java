@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-public abstract class CourseMapper {
+public interface CourseMapper {
 
     @Insert("INSERT INTO course (course_name, credits, semester_id, instructor_id, department_id, classroom_id, description) " +
             "VALUES (#{courseName}, #{credits}, #{semesterId}, #{instructorId}, #{departmentId}, #{classroomId}, #{description})")

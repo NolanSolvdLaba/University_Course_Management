@@ -7,9 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDAO extends GenericDAO<Student> {
+public class StudentDAO {
 
-    @Override
     public void create(Student student) {
         String query = "INSERT INTO student (student_name, admission_year, department_id, department_name) " +
                 "VALUES (?, ?, ?, ?)";
@@ -25,7 +24,6 @@ public class StudentDAO extends GenericDAO<Student> {
         }
     }
 
-    @Override
     public Student getById(int id) {
         String query = "SELECT * FROM student WHERE student_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -64,7 +62,6 @@ public class StudentDAO extends GenericDAO<Student> {
         return null;
     }
 
-    @Override
     public void update(Student student) {
         String sql = "UPDATE student SET student_name = ?, admission_year = ?, department_id = ?, department_name = ? WHERE student_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -80,7 +77,6 @@ public class StudentDAO extends GenericDAO<Student> {
         }
     }
 
-    @Override
     public void delete(int id) {
         String query = "DELETE FROM student WHERE student_id = ?";
         try (Connection connection = ConnectionPool.getConnection();
@@ -92,7 +88,6 @@ public class StudentDAO extends GenericDAO<Student> {
         }
     }
 
-    @Override
     public List<Student> getAll() {
         List<Student> students = new ArrayList<>();
         String query = "SELECT * FROM student";
