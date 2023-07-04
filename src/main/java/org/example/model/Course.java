@@ -53,10 +53,6 @@
             this.description = description;
         }
 
-        public Course() {
-
-        }
-
         public int getCourseId() {
             return courseId;
         }

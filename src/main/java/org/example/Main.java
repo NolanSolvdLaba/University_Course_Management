@@ -24,19 +24,22 @@ public class Main {
                 // Get the mapper interface
                 CourseMapper courseMapper = session.getMapper(CourseMapper.class);
 
-                // Create a new course
-                Course course = new Course();
-                course.setCourseName("Mathematics");
-                course.setCredits(3);
-
-                // Insert the course
-                courseMapper.create(course);
-
                 // Retrieve all courses
                 List<Course> courses = courseMapper.getAll();
                 for (Course c : courses) {
                     System.out.println(c);
                 }
+
+                // Create a new course
+                Course course = new Course("Algebra", 3, 1, 1, 1, 1, "Math class");
+
+                // Insert the course
+                courseMapper.create(course);
+
+                // Commit the changes
+                session.commit();
+
+
             }
         } catch (IOException e) {
             e.printStackTrace();
