@@ -10,7 +10,7 @@ public interface CourseMapper {
 
     @Insert("INSERT INTO course (course_name, credits, semester_id, instructor_id, department_id, classroom_id, description) " +
             "VALUES (#{courseName}, #{credits}, #{semesterId}, #{instructorId}, #{departmentId}, #{classroomId}, #{description})")
-    @Options(useGeneratedKeys = true, keyProperty = "courseId")
+    //@Options(useGeneratedKeys = true, keyProperty = "courseId")
     public abstract void create(Course course);
 
     @Select("SELECT * FROM course WHERE course_id = #{id}")

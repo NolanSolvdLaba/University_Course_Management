@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ClassroomMapper">
+
+    <insert id="create" parameterType="org.example.model.Classroom">
+        INSERT INTO classroom (classroom_number, capacity)
+        VALUES (#{classroomNumber}, #{capacity})
+    </insert>
+
+    <select id="getById" resultType="org.example.model.Classroom" parameterType="int">
+        SELECT * FROM classroom WHERE classroom_id = #{id}
+    </select>
+
+    <update id="update" parameterType="org.example.model.Classroom">
+        UPDATE classroom SET classroom_number = #{classroomNumber}, capacity = #{capacity}
+        WHERE classroom_id = #{classroomId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM classroom WHERE classroom_id = #{id}
+    </delete>
+
+    <select id="getAll" resultType="org.example.model.Classroom">
+        SELECT * FROM classroom
+    </select>
+
+</mapper>

@@ -1,35 +1,36 @@
 package org.example.service;
 
-import org.example.dao.ClassroomDAO;
+import org.example.dao.ClassroomMapper;
 import org.example.model.Classroom;
+import org.example.util.MyBatisUtil;
 
 import java.util.List;
 
 public class ClassroomService {
 
-    private final ClassroomDAO classroomDAO;
+    private final ClassroomMapper classroomMapper;
 
     public ClassroomService() {
-        this.classroomDAO = new ClassroomDAO();
+        this.classroomMapper = MyBatisUtil.getClassroomMapper();
     }
 
     public void create(Classroom classroom) {
-        classroomDAO.create(classroom);
+        classroomMapper.create(classroom);
     }
 
     public Classroom getById(int id) {
-        return classroomDAO.getById(id);
+        return classroomMapper.getById(id);
     }
 
     public void update(Classroom classroom) {
-        classroomDAO.update(classroom);
+        classroomMapper.update(classroom);
     }
 
     public void delete(int id) {
-        classroomDAO.delete(id);
+        classroomMapper.delete(id);
     }
 
     public List<Classroom> getAll() {
-        return classroomDAO.getAll();
+        return classroomMapper.getAll();
     }
 }

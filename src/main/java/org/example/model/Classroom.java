@@ -23,8 +23,7 @@ public class Classroom {
     @JsonProperty("capacity")
     private int capacity;
 
-    public Classroom(int classroomId, String classroomNumber, int capacity) {
-        this.classroomId = classroomId;
+    public Classroom(String classroomNumber, int capacity) {
         this.classroomNumber = classroomNumber;
         this.capacity = capacity;
     }

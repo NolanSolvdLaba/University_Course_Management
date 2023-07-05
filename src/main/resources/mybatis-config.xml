@@ -17,5 +17,6 @@
     <mappers>
         <!-- Register your mapper interfaces here -->
         <mapper resource="mappers/CourseMapper.xml" />
+        <mapper resource="mappers/ClassroomMapper.xml" />
     </mappers>
 </configuration>
