@@ -1,45 +1,48 @@
 package org.example;
 
 import org.apache.ibatis.session.SqlSession;
-import org.example.dao.ClassroomMapper;
-import org.example.model.Classroom;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.example.dao.CourseMapper;
+import org.example.model.Course;
+import org.example.service.CourseService;
 import org.example.util.MyBatisUtil;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        try (SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            ClassroomMapper classroomMapper = sqlSession.getMapper(ClassroomMapper.class);
+        // Create a SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
 
-            // Create a new classroom
-            Classroom classroom = new Classroom("101", 30);
-            classroomMapper.create(classroom);
-            System.out.println("Created classroom: " + classroom);
+        // Create a SqlSession
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            // Create instances of the service classes
+            CourseMapper courseMapper = sqlSession.getMapper(CourseMapper.class);
+            CourseService courseService = new CourseService(courseMapper);
 
-            // Get classroom by ID
-            int classroomId = 1;
-            Classroom fetchedClassroom = classroomMapper.getById(classroomId);
-            System.out.println("Fetched classroom by ID " + classroomId + ": " + fetchedClassroom);
+            // Create a new course
+            Course course = new Course("Calc", 4, 1, 1, 1, 1, "Introduction to Mathematics");
+            courseService.create(course);
+            System.out.println("Created course: " + course);
 
-            // Update classroom
-            fetchedClassroom.setCapacity(35);
-            classroomMapper.update(fetchedClassroom);
-            System.out.println("Updated classroom: " + fetchedClassroom);
+            // Get course by ID
+            int courseId = 1;
+            Course fetchedCourse = courseService.getById(courseId);
+            System.out.println("Fetched course by ID " + courseId + ": " + fetchedCourse);
 
-            // Delete classroom
-            int classroomToDeleteId = 2;
-            classroomMapper.delete(classroomToDeleteId);
-            System.out.println("Deleted classroom with ID " + classroomToDeleteId);
+            // Delete course
+            int courseToDeleteId = 2;
+            courseService.delete(courseToDeleteId);
+            System.out.println("Deleted course with ID " + courseToDeleteId);
 
-            // Get all classrooms
-            List<Classroom> classrooms = classroomMapper.getAll();
-            System.out.println("All classrooms: ");
-            for (Classroom c : classrooms) {
+            // Get all courses
+            List<Course> courses = courseService.getAll();
+            System.out.println("All courses: ");
+            for (Course c : courses) {
                 System.out.println(c);
             }
 
-            sqlSession.commit(); // Commit the changes
+            }
         }
     }
-}
+

@@ -14,11 +14,6 @@
         SELECT * FROM classroom WHERE classroom_id = #{id}
     </select>
 
-    <update id="update" parameterType="org.example.model.Classroom">
-        UPDATE classroom SET classroom_number = #{classroomNumber}, capacity = #{capacity}
-        WHERE classroom_id = #{classroomId}
-    </update>
-
     <delete id="delete" parameterType="int">
         DELETE FROM classroom WHERE classroom_id = #{id}
     </delete>

@@ -26,10 +26,4 @@ public class MyBatisUtil {
         return sqlSessionFactory;
     }
 
-    public static ClassroomMapper getClassroomMapper() {
-        try (SqlSession session = sqlSessionFactory.openSession()) {
-            return session.getMapper(ClassroomMapper.class);
-        }
-    }
-
 }
