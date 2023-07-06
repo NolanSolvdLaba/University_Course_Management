@@ -6,13 +6,13 @@
 <mapper namespace="org.example.dao.CourseMapper">
 
     <!-- SELECT statement to retrieve a course by ID -->
-    <select id="selectCourseById" parameterType="int" resultType="org.example.model.Course">
+    <select id="getById" parameterType="int" resultType="org.example.model.Course">
         SELECT * FROM course
         WHERE course_id = #{id}
     </select>
 
     <!-- INSERT statement to insert a new course -->
-    <insert id="insertCourse" parameterType="org.example.model.Course">
+    <insert id="create" parameterType="org.example.model.Course">
         INSERT INTO course (course_name, credits, semester_id, instructor_id, department_id, classroom_id, description)
         VALUES (#{courseName}, #{credits}, #{semesterId}, #{instructorId}, #{departmentId}, #{classroomId}, #{description})
     </insert>
@@ -27,13 +27,13 @@
     </update>
 
     <!-- DELETE statement to delete a course by ID -->
-    <delete id="deleteCourse" parameterType="int">
+    <delete id="delete" parameterType="int">
         DELETE FROM course
         WHERE course_id = #{id}
     </delete>
 
     <!-- SELECT statement to retrieve all courses -->
-    <select id="selectAllCourses" resultType="org.example.model.Course">
+    <select id="getAll" resultType="org.example.model.Course">
         SELECT * FROM course
     </select>
 

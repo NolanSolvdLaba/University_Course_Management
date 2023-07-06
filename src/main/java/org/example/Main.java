@@ -2,8 +2,11 @@ package org.example;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.example.dao.ClassroomMapper;
 import org.example.dao.CourseMapper;
+import org.example.model.Classroom;
 import org.example.model.Course;
+import org.example.service.ClassroomService;
 import org.example.service.CourseService;
 import org.example.util.MyBatisUtil;
 
@@ -16,33 +19,28 @@ public class Main {
 
         // Create a SqlSession
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            // Create instances of the service classes
-            CourseMapper courseMapper = sqlSession.getMapper(CourseMapper.class);
-            CourseService courseService = new CourseService(courseMapper);
+            ClassroomMapper classroomMapper = sqlSession.getMapper(ClassroomMapper.class);
+            ClassroomService classroomService = new ClassroomService(classroomMapper);
 
-            // Create a new course
-            Course course = new Course("Calc", 4, 1, 1, 1, 1, "Introduction to Mathematics");
-            courseService.create(course);
-            System.out.println("Created course: " + course);
+            Classroom classroom = new Classroom(101, 50);
+            classroomService.create(classroom);
+            System.out.println("Created classroom: " + classroom);
 
-            // Get course by ID
-            int courseId = 1;
-            Course fetchedCourse = courseService.getById(courseId);
-            System.out.println("Fetched course by ID " + courseId + ": " + fetchedCourse);
+            int classroomId = 1;
+            Classroom fetchedClassroom = classroomService.getById(classroomId);
+            System.out.println("Fetched classroom by ID " + classroomId + ": " + fetchedClassroom);
 
-            // Delete course
-            int courseToDeleteId = 2;
-            courseService.delete(courseToDeleteId);
-            System.out.println("Deleted course with ID " + courseToDeleteId);
+            int classroomToDeleteId = 2;
+            classroomService.delete(classroomToDeleteId);
+            System.out.println("Deleted classroom with ID " + classroomToDeleteId);
 
-            // Get all courses
-            List<Course> courses = courseService.getAll();
-            System.out.println("All courses: ");
-            for (Course c : courses) {
+            List<Classroom> classrooms = classroomService.getAll();
+            System.out.println("All classrooms: ");
+            for (Classroom c : classrooms) {
                 System.out.println(c);
             }
 
-            }
+        }
         }
     }
 

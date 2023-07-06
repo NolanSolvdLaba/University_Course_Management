@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.SemesterMapper">
+
+    <!-- Insert a new semester record -->
+    <insert id="create" parameterType="org.example.model.Semester">
+        INSERT INTO semester (semester_name, start_date, end_date)
+        VALUES (#{semesterName}, #{startDate}, #{endDate})
+    </insert>
+
+    <!-- Retrieve a semester by ID -->
+    <select id="getById" parameterType="int" resultType="org.example.model.Semester">
+        SELECT * FROM semester WHERE semester_id = #{id}
+    </select>
+
+    <!-- Update an existing semester record -->
+    <update id="update" parameterType="org.example.model.Semester">
+        UPDATE semester SET
+        semester_name = #{semesterName},
+        start_date = #{startDate},
+        end_date = #{endDate}
+        WHERE semester_id = #{semesterId}
+    </update>
+
+    <!-- Delete a semester by ID -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM semester WHERE semester_id = #{id}
+    </delete>
+
+    <!-- Retrieve all semesters -->
+    <select id="getAll" resultType="org.example.model.Semester">
+        SELECT * FROM semester
+    </select>
+
+</mapper>

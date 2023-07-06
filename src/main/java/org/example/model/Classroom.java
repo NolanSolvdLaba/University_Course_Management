@@ -1,6 +1,5 @@
 package org.example.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -11,36 +10,24 @@ import javax.xml.bind.annotation.*;
 @JsonRootName("Classroom")
 public class Classroom {
 
-    @JsonIgnore
-    @XmlTransient
-    private int classroomId;
-
     @XmlElement(name = "classroom_number")
     @JsonProperty("classroomNumber")
-    private String classroomNumber;
+    private int classroomNumber;
 
     @XmlElement(name = "capacity")
     @JsonProperty("capacity")
     private int capacity;
 
-    public Classroom(String classroomNumber, int capacity) {
+    public Classroom(int classroomNumber, int capacity) {
         this.classroomNumber = classroomNumber;
         this.capacity = capacity;
     }
 
-    public int getClassroomId() {
-        return classroomId;
+    public int getClassroomNumber() {
+        return this.classroomNumber;
     }
 
-    public void setClassroomId(int classroomId) {
-        this.classroomId = classroomId;
-    }
-
-    public String getClassroomNumber() {
-        return classroomNumber;
-    }
-
-    public void setClassroomNumber(String classroomNumber) {
+    public void setClassroomNumber(int classroomNumber) {
         this.classroomNumber = classroomNumber;
     }
 
@@ -50,5 +37,13 @@ public class Classroom {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    @Override
+    public String toString() {
+        return "Classroom{" +
+                "classroomNumber=" + classroomNumber +
+                ", capacity=" + capacity +
+                '}';
     }
 }

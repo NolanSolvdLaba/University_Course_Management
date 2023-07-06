@@ -6,29 +6,29 @@ import org.example.model.Course;
 import java.util.List;
 
 public class CourseService {
-    private final CourseMapper courseDAO;
+    private final CourseMapper courseMapper;
 
-    public CourseService(CourseMapper courseDAO) {
-        this.courseDAO = courseDAO;
+    public CourseService(CourseMapper courseMapper) {
+        this.courseMapper = courseMapper;
     }
 
     public void create(Course course) {
-        courseDAO.create(course);
+        courseMapper.create(course);
     }
 
     public Course getById(int id) {
-        return courseDAO.getById(id);
+        return courseMapper.getById(id);
     }
 
     public void update(Course course) {
-        courseDAO.update(course);
+        courseMapper.update(course);
     }
 
     public void delete(int id) {
-        courseDAO.delete(id);
+        courseMapper.delete(id);
     }
 
     public List<Course> getAll() {
-        return courseDAO.getAll();
+        return courseMapper.getAll();
     }
 }

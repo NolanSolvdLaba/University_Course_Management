@@ -1,25 +1,40 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.example.dao.ClassroomMapper">
+<mapper namespace="org.example.dao.CourseMapper">
 
-    <insert id="create" parameterType="org.example.model.Classroom">
-        INSERT INTO classroom (classroom_number, capacity)
-        VALUES (#{classroomNumber}, #{capacity})
-    </insert>
-
-    <select id="getById" resultType="org.example.model.Classroom" parameterType="int">
-        SELECT * FROM classroom WHERE classroom_id = #{id}
+    <!-- SELECT statement to retrieve a course by ID -->
+    <select id="getById" parameterType="int" resultType="org.example.model.Course">
+        SELECT * FROM course
+        WHERE course_id = #{id}
     </select>
 
+    <!-- INSERT statement to insert a new course -->
+    <insert id="create" parameterType="org.example.model.Course">
+        INSERT INTO course (course_name, credits, semester_id, instructor_id, department_id, classroom_id, description)
+        VALUES (#{courseName}, #{credits}, #{semesterId}, #{instructorId}, #{departmentId}, #{classroomId}, #{description})
+    </insert>
+
+    <!-- UPDATE statement to update an existing course -->
+    <update id="updateCourse" parameterType="org.example.model.Course">
+        UPDATE course
+        SET course_name = #{courseName}, credits = #{credits}, semester_id = #{semesterId},
+        instructor_id = #{instructorId}, department_id = #{departmentId},
+        classroom_id = #{classroomId}, description = #{description}
+        WHERE course_id = #{courseId}
+    </update>
+
+    <!-- DELETE statement to delete a course by ID -->
     <delete id="delete" parameterType="int">
-        DELETE FROM classroom WHERE classroom_id = #{id}
+        DELETE FROM course
+        WHERE course_id = #{id}
     </delete>
 
-    <select id="getAll" resultType="org.example.model.Classroom">
-        SELECT * FROM classroom
+    <!-- SELECT statement to retrieve all courses -->
+    <select id="getAll" resultType="org.example.model.Course">
+        SELECT * FROM course
     </select>
 
 </mapper>
