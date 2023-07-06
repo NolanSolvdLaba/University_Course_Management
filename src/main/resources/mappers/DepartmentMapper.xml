@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.dao.DepartmentMapper">
-    <insert id="create" parameterType="org.example.model.Department">
+
+    <resultMap id="DepartmentResultMap" type="org.example.model.Department">
+        <result property="departmentId" column="department_id"/>
+        <result property="departmentName" column="department_name"/>
+    </resultMap>
+
+    <insert id="create" parameterType="org.example.model.Department" useGeneratedKeys="true" keyProperty="departmentId">
         INSERT INTO department (department_name) VALUES (#{departmentName})
     </insert>
 

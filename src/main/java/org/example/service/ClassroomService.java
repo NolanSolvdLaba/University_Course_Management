@@ -20,6 +20,10 @@ public class ClassroomService {
         return classroomMapper.getById(id);
     }
 
+    public void update(Classroom classroom) {
+        classroomMapper.update(classroom);
+    }
+
     public void delete(int id) {
         classroomMapper.delete(id);
     }

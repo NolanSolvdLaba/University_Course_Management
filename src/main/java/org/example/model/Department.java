@@ -1,22 +1,9 @@
 package org.example.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-
-import javax.xml.bind.annotation.*;
-
-@XmlRootElement(name = "Department")
-@XmlAccessorType(XmlAccessType.FIELD)
-@JsonRootName("Department")
 public class Department {
 
-    @JsonIgnore
-    @XmlTransient
     private int departmentId;
 
-    @XmlAttribute(name = "departmentName")
-    @JsonProperty("departmentName")
     private String departmentName;
 
     public Department(String departmentName) {

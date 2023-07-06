@@ -2,9 +2,9 @@ package org.example;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.example.dao.DepartmentMapper;
-import org.example.model.Department;
-import org.example.service.DepartmentService;
+import org.example.dao.ClassroomMapper;
+import org.example.model.Classroom;
+import org.example.service.ClassroomService;
 import org.example.util.MyBatisUtil;
 
 import java.util.List;
@@ -16,34 +16,34 @@ public class Main {
 
         // Create a SqlSession
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            DepartmentMapper departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
-            DepartmentService departmentService = new DepartmentService(departmentMapper);
+            ClassroomMapper classroomMapper = sqlSession.getMapper(ClassroomMapper.class);
+            ClassroomService classroomService = new ClassroomService(classroomMapper);
 
-            // Create a new department
-            Department department = new Department("Computer Science");
-            departmentService.create(department);
-            System.out.println("Created department: " + department);
+            // Create a new classroom
+            Classroom classroom = new Classroom(171, 30);
+            classroomService.create(classroom);
+            System.out.println("Created classroom: " + classroom);
 
-            // Get department by ID
-            int departmentId = 1;
-            Department fetchedDepartment = departmentService.getById(departmentId);
-            System.out.println("Fetched department by ID " + departmentId + ": " + fetchedDepartment);
+            // Get classroom by ID
+            int classroomId = 1;
+            Classroom fetchedClassroom = classroomService.getById(classroomId);
+            System.out.println("Fetched classroom by ID " + classroomId + ": " + fetchedClassroom);
 
-            // Update department
-            fetchedDepartment.setDepartmentName("Software Engineering");
-            departmentService.update(fetchedDepartment);
-            System.out.println("Updated department: " + fetchedDepartment);
+            // Update classroom
+            classroom.setCapacity(40);
+            classroomService.update(classroom);
+            System.out.println("Updated classroom: " + classroom);
 
-            // Delete department
-            int departmentToDeleteId = 2;
-            departmentService.delete(departmentToDeleteId);
-            System.out.println("Deleted department with ID " + departmentToDeleteId);
+            // Delete classroom
+            int classroomToDeleteId = 2;
+            classroomService.delete(classroomToDeleteId);
+            System.out.println("Deleted classroom with ID " + classroomToDeleteId);
 
-            // Get all departments
-            List<Department> departments = departmentService.getAll();
-            System.out.println("All departments: ");
-            for (Department d : departments) {
-                System.out.println(d);
+            // Get all classrooms
+            List<Classroom> classrooms = classroomService.getAll();
+            System.out.println("All classrooms: ");
+            for (Classroom c : classrooms) {
+                System.out.println(c);
             }
         }
     }

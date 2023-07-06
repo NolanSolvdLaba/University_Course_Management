@@ -5,36 +5,38 @@
 
 <mapper namespace="org.example.dao.ClassroomMapper">
 
-    <!-- SELECT statement to retrieve a course by ID -->
-    <select id="getById" parameterType="int" resultType="org.example.model.Course">
-        SELECT * FROM course
-        WHERE course_id = #{id}
+    <!-- SELECT statement to retrieve a classroom by ID -->
+    <select id="getById" parameterType="int" resultType="org.example.model.Classroom">
+        SELECT * FROM classroom
+        WHERE classroom_id = #{id}
     </select>
 
-    <!-- INSERT statement to insert a new course -->
-    <insert id="create" parameterType="org.example.model.Course">
-        INSERT INTO course (course_name, credits, semester_id, instructor_id, department_id, classroom_id, description)
-        VALUES (#{courseName}, #{credits}, #{semesterId}, #{instructorId}, #{departmentId}, #{classroomId}, #{description})
+    <!-- INSERT statement to insert a new classroom -->
+    <insert id="create" parameterType="org.example.model.Classroom">
+        <selectKey keyProperty="classroomId" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO classroom (classroom_number, capacity)
+        VALUES (#{classroomNumber}, #{capacity})
     </insert>
 
-    <!-- UPDATE statement to update an existing course -->
-    <update id="updateCourse" parameterType="org.example.model.Course">
-        UPDATE course
-        SET course_name = #{courseName}, credits = #{credits}, semester_id = #{semesterId},
-        instructor_id = #{instructorId}, department_id = #{departmentId},
-        classroom_id = #{classroomId}, description = #{description}
-        WHERE course_id = #{courseId}
+
+    <!-- UPDATE statement to update an existing classroom -->
+    <update id="update" parameterType="org.example.model.Classroom">
+        UPDATE classroom
+        SET classroom_number = #{classroomNumber}, capacity = #{capacity}
+        WHERE classroom_id = #{classroomId}
     </update>
 
-    <!-- DELETE statement to delete a course by ID -->
+    <!-- DELETE statement to delete a classroom by ID -->
     <delete id="delete" parameterType="int">
-        DELETE FROM course
-        WHERE course_id = #{id}
+        DELETE FROM classroom
+        WHERE classroom_id = #{id}
     </delete>
 
-    <!-- SELECT statement to retrieve all courses -->
-    <select id="getAll" resultType="org.example.model.Course">
-        SELECT * FROM course
+    <!-- SELECT statement to retrieve all classrooms -->
+    <select id="getAll" resultType="org.example.model.Classroom">
+        SELECT * FROM classroom
     </select>
 
 </mapper>
