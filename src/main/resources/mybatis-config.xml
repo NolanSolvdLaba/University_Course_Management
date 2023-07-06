@@ -20,5 +20,6 @@
         <mapper resource="mappers/ClassroomMapper.xml" />
         <mapper resource="mappers/SemesterMapper.xml" />
         <mapper resource="mappers/StudentMapper.xml" />
+        <mapper resource="mappers/DepartmentMapper.xml" />
     </mappers>
 </configuration>
