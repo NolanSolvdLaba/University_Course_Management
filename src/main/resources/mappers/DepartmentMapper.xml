@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.dao.DepartmentMapper">
+    <insert id="create" parameterType="org.example.model.Department">
+        INSERT INTO department (department_name) VALUES (#{departmentName})
+    </insert>
+
+    <select id="getById" parameterType="int" resultType="org.example.model.Department">
+        SELECT * FROM department WHERE department_id = #{id}
+    </select>
+
+    <update id="update" parameterType="org.example.model.Department">
+        UPDATE department SET department_name = #{departmentName} WHERE department_id = #{departmentId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM department WHERE department_id = #{id}
+    </delete>
+
+    <select id="getAll" resultType="org.example.model.Department">
+        SELECT * FROM department
+    </select>
+</mapper>

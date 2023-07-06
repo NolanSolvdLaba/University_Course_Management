@@ -5,15 +5,10 @@ import java.util.List;
 public class Student extends User {
 
     private int studentId;
-
     private String studentName;
-
     private int admissionYear;
-
     private int departmentId;
-
     private String departmentName;
-
     private List<Course> courses;
 
     public Student(String studentName, int admissionYear, int departmentId, String departmentName) {
