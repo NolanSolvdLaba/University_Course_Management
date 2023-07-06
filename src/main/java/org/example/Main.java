@@ -2,9 +2,9 @@ package org.example;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.example.dao.StudentMapper;
-import org.example.model.Student;
-import org.example.service.StudentService;
+import org.example.dao.DepartmentMapper;
+import org.example.model.Department;
+import org.example.service.DepartmentService;
 import org.example.util.MyBatisUtil;
 
 import java.util.List;
@@ -16,29 +16,34 @@ public class Main {
 
         // Create a SqlSession
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
-            StudentService studentService = new StudentService(studentMapper);
+            DepartmentMapper departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
+            DepartmentService departmentService = new DepartmentService(departmentMapper);
 
-            // Create a new student
-            Student student = new Student("John Doe", 2022, 1, "Computer Science");
-            studentService.create(student);
-            System.out.println("Created student: " + student);
+            // Create a new department
+            Department department = new Department("Computer Science");
+            departmentService.create(department);
+            System.out.println("Created department: " + department);
 
-            // Get student by ID
-            int studentId = 4;
-            Student fetchedStudent = studentService.getById(studentId);
-            System.out.println("Fetched student by ID " + studentId + ": " + fetchedStudent);
+            // Get department by ID
+            int departmentId = 1;
+            Department fetchedDepartment = departmentService.getById(departmentId);
+            System.out.println("Fetched department by ID " + departmentId + ": " + fetchedDepartment);
 
-            // Delete student
-            int studentToDeleteId = 2;
-            studentService.delete(studentToDeleteId);
-            System.out.println("Deleted student with ID " + studentToDeleteId);
+            // Update department
+            fetchedDepartment.setDepartmentName("Software Engineering");
+            departmentService.update(fetchedDepartment);
+            System.out.println("Updated department: " + fetchedDepartment);
 
-            // Get all students
-            List<Student> students = studentService.getAll();
-            System.out.println("All students: ");
-            for (Student s : students) {
-                System.out.println(s);
+            // Delete department
+            int departmentToDeleteId = 2;
+            departmentService.delete(departmentToDeleteId);
+            System.out.println("Deleted department with ID " + departmentToDeleteId);
+
+            // Get all departments
+            List<Department> departments = departmentService.getAll();
+            System.out.println("All departments: ");
+            for (Department d : departments) {
+                System.out.println(d);
             }
         }
     }

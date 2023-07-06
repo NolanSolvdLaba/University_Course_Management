@@ -1,40 +1,35 @@
 package org.example.service;
 
-import org.example.dao.DepartmentDAO;
+import org.example.dao.DepartmentMapper;
 import org.example.model.Department;
 
 import java.util.List;
 
-public class DepartmentService implements GenericService<Department> {
+public class DepartmentService {
 
-    private final DepartmentDAO departmentDAO;
+    private final DepartmentMapper departmentMapper;
 
-    public DepartmentService() {
-        this.departmentDAO = new DepartmentDAO();
+    public DepartmentService(DepartmentMapper departmentMapper) {
+        this.departmentMapper = departmentMapper;
     }
 
-    @Override
     public void create(Department department) {
-        departmentDAO.create(department);
+        departmentMapper.create(department);
     }
 
-    @Override
     public Department getById(int id) {
-        return departmentDAO.getById(id);
+        return departmentMapper.getById(id);
     }
 
-    @Override
     public void update(Department department) {
-        departmentDAO.update(department);
+        departmentMapper.update(department);
     }
 
-    @Override
     public void delete(int id) {
-        departmentDAO.delete(id);
+        departmentMapper.delete(id);
     }
 
-    @Override
     public List<Department> getAll() {
-        return departmentDAO.getAll();
+        return departmentMapper.getAll();
     }
 }
