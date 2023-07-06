@@ -20,7 +20,6 @@
         VALUES (#{classroomNumber}, #{capacity})
     </insert>
 
-
     <!-- UPDATE statement to update an existing classroom -->
     <update id="update" parameterType="org.example.model.Classroom">
         UPDATE classroom

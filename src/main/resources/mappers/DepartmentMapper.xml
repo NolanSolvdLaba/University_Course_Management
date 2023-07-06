@@ -8,7 +8,7 @@
         <result property="departmentName" column="department_name"/>
     </resultMap>
 
-    <insert id="create" parameterType="org.example.model.Department" useGeneratedKeys="true" keyProperty="departmentId">
+    <insert id="create" parameterType="org.example.model.Department">
         INSERT INTO department (department_name) VALUES (#{departmentName})
     </insert>
 

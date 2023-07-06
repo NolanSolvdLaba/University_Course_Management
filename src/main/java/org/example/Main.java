@@ -3,8 +3,11 @@ package org.example;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.example.dao.ClassroomMapper;
+import org.example.dao.DepartmentMapper;
 import org.example.model.Classroom;
+import org.example.model.Department;
 import org.example.service.ClassroomService;
+import org.example.service.DepartmentService;
 import org.example.util.MyBatisUtil;
 
 import java.util.List;
@@ -21,8 +24,13 @@ public class Main {
 
             // Create a new classroom
             Classroom classroom = new Classroom(171, 30);
-            classroomService.create(classroom);
-            System.out.println("Created classroom: " + classroom);
+            try {
+                classroomService.create(classroom);
+                System.out.println("Created classroom: " + classroom);
+            } catch (Exception e) {
+                System.out.println("Error while creating classroom: " + e.getMessage());
+                e.printStackTrace();
+            }
 
             // Get classroom by ID
             int classroomId = 1;
@@ -44,6 +52,21 @@ public class Main {
             System.out.println("All classrooms: ");
             for (Classroom c : classrooms) {
                 System.out.println(c);
+            }
+
+            DepartmentMapper departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
+            DepartmentService departmentService = new DepartmentService(departmentMapper);
+
+            // Create a new department
+            Department newDepartment = new Department("Physiology");
+            departmentMapper.create(newDepartment);
+            System.out.println("Created department: " + newDepartment);
+
+            // Get all departments
+            List<Department> departments = departmentMapper.getAll();
+            System.out.println("All departments: ");
+            for (Department department : departments) {
+                System.out.println(department);
             }
         }
     }
