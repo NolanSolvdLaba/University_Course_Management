@@ -4,10 +4,6 @@ public class User {
     private String login;
     private String password;
 
-    public User() {
-        // Default constructor
-    }
-
     // Constructor
     public User(String login, String password) {
         this.login = login;

@@ -2,12 +2,11 @@ package org.example;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.example.dao.SemesterMapper;
-import org.example.model.Semester;
-import org.example.service.SemesterService;
+import org.example.dao.StudentMapper;
+import org.example.model.Student;
+import org.example.service.StudentService;
 import org.example.util.MyBatisUtil;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
@@ -17,28 +16,28 @@ public class Main {
 
         // Create a SqlSession
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            SemesterMapper semesterMapper = sqlSession.getMapper(SemesterMapper.class);
-            SemesterService semesterService = new SemesterService(semesterMapper);
+            StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+            StudentService studentService = new StudentService(studentMapper);
 
-            // Create a new semester
-            Semester semester = new Semester("Spring", LocalDate.of(2023, 1, 1), LocalDate.of(2023, 5, 31));
-            semesterService.create(semester);
-            System.out.println("Created semester: " + semester);
+            // Create a new student
+            Student student = new Student("John Doe", 2022, 1, "Computer Science");
+            studentService.create(student);
+            System.out.println("Created student: " + student);
 
-            // Get semester by ID
-            int semesterId = 1;
-            Semester fetchedSemester = semesterService.getById(semesterId);
-            System.out.println("Fetched semester by ID " + semesterId + ": " + fetchedSemester);
+            // Get student by ID
+            int studentId = 4;
+            Student fetchedStudent = studentService.getById(studentId);
+            System.out.println("Fetched student by ID " + studentId + ": " + fetchedStudent);
 
-            // Delete semester
-            int semesterToDeleteId = 2;
-            semesterService.delete(semesterToDeleteId);
-            System.out.println("Deleted semester with ID " + semesterToDeleteId);
+            // Delete student
+            int studentToDeleteId = 2;
+            studentService.delete(studentToDeleteId);
+            System.out.println("Deleted student with ID " + studentToDeleteId);
 
-            // Get all semesters
-            List<Semester> semesters = semesterService.getAll();
-            System.out.println("All semesters: ");
-            for (Semester s : semesters) {
+            // Get all students
+            List<Student> students = studentService.getAll();
+            System.out.println("All students: ");
+            for (Student s : students) {
                 System.out.println(s);
             }
         }

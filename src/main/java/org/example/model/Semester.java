@@ -12,25 +12,14 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import java.time.LocalDate;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-@JsonRootName("Semester")
 public class Semester {
 
-    @JsonIgnore
-    @XmlTransient
     private int semesterId;
 
-    @XmlElement(name="semesterName")
-    @JsonProperty("semesterName")
     private SemesterName semesterName;
 
-    @XmlJavaTypeAdapter(DateAdapter.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @XmlJavaTypeAdapter(DateAdapter.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     public Semester(String semesterName, LocalDate startDate, LocalDate endDate) {
@@ -51,9 +40,10 @@ public class Semester {
         return semesterName;
     }
 
-    public void setSemesterName(SemesterName semesterName) {
-        this.semesterName = semesterName;
+    public void setSemesterName(String semesterName) {
+        this.semesterName = SemesterName.valueOf(semesterName.toUpperCase());
     }
+
 
     public LocalDate getStartDate() {
         return startDate;

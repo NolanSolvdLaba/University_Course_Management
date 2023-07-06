@@ -3,36 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.example.dao.SemesterMapper">
+<mapper namespace="org.example.dao.StudentMapper">
 
-    <!-- Insert a new semester record -->
-    <insert id="create" parameterType="org.example.model.Semester">
-        INSERT INTO semester (semester_name, start_date, end_date)
-        VALUES (#{semesterName}, #{startDate}, #{endDate})
+    <!-- Insert a new student record -->
+    <insert id="create" parameterType="org.example.model.Student">
+        INSERT INTO student (student_name, admission_year, department_id, department_name)
+        VALUES (#{studentName}, #{admissionYear}, #{departmentId}, #{departmentName})
     </insert>
 
-    <!-- Retrieve a semester by ID -->
-    <select id="getById" parameterType="int" resultType="org.example.model.Semester">
-        SELECT * FROM semester WHERE semester_id = #{id}
+    <!-- Retrieve a student by ID -->
+    <select id="getById" parameterType="int" resultType="org.example.model.Student">
+        SELECT * FROM student WHERE student_id = #{id}
     </select>
 
-    <!-- Update an existing semester record -->
-    <update id="update" parameterType="org.example.model.Semester">
-        UPDATE semester SET
-        semester_name = #{semesterName},
-        start_date = #{startDate},
-        end_date = #{endDate}
-        WHERE semester_id = #{semesterId}
+    <!-- Update an existing student record -->
+    <update id="update" parameterType="org.example.model.Student">
+        UPDATE student SET
+        student_name = #{studentName},
+        admission_year = #{admissionYear},
+        department_id = #{departmentId},
+        department_name = #{departmentName}
+        WHERE student_id = #{studentId}
     </update>
 
-    <!-- Delete a semester by ID -->
+    <!-- Delete a student by ID -->
     <delete id="delete" parameterType="int">
-        DELETE FROM semester WHERE semester_id = #{id}
+        DELETE FROM student WHERE student_id = #{id}
     </delete>
 
-    <!-- Retrieve all semesters -->
-    <select id="getAll" resultType="org.example.model.Semester">
-        SELECT * FROM semester
+    <!-- Retrieve all students -->
+    <select id="getAll" resultType="org.example.model.Student">
+        SELECT * FROM student
     </select>
 
 </mapper>

@@ -1,39 +1,36 @@
 package org.example.service;
 
-import org.example.dao.StudentDAO;
+import org.example.dao.StudentMapper;
 import org.example.model.Student;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class StudentService {
-    private StudentDAO studentDAO;
+    private final StudentMapper studentMapper;
 
-    public StudentService() {
-        this.studentDAO = new StudentDAO();
+    public StudentService(StudentMapper studentMapper) {
+        this.studentMapper = studentMapper;
     }
 
     public void create(Student student) {
-        if (studentDAO.getByName(student.getStudentName()) == null) {
-            studentDAO.create(student);
+        if (studentMapper.getById(student.getStudentId()) == null) {
+            studentMapper.create(student);
         } else {
             System.out.println("Student already exists: " + student.getStudentName());
         }
     }
 
-    public Student getById(int id) {
-        return studentDAO.getById(id);
-    }
+
 
     public void update(Student student) {
-        studentDAO.update(student);
+        studentMapper.update(student);
     }
 
     public void delete(int id) {
-        studentDAO.delete(id);
+        studentMapper.delete(id);
     }
 
     public List<Student> getAll() {
-        return studentDAO.getAll();
+        return studentMapper.getAll();
     }
 }
