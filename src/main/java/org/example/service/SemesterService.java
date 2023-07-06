@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.dao.SemesterMapper;
 import org.example.model.Semester;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public class SemesterService  {

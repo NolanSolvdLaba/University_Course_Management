@@ -18,5 +18,6 @@
         <!-- Register your mapper interfaces here -->
         <mapper resource="mappers/CourseMapper.xml" />
         <mapper resource="mappers/ClassroomMapper.xml" />
+        <mapper resource="mappers/SemesterMapper.xml" />
     </mappers>
 </configuration>

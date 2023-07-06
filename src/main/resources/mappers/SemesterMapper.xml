@@ -17,8 +17,9 @@
         SELECT <include refid="semesterColumns"/> FROM semester WHERE semester_id = #{id}
     </select>
 
-    <insert id="create" parameterType="org.example.model.Semester" useGeneratedKeys="true" keyProperty="semesterId">
-        INSERT INTO semester (<include refid="semesterColumns"/>) VALUES (#{semesterName}, #{startDate}, #{endDate})
+    <insert id="create" parameterType="org.example.model.Semester">
+        INSERT INTO semester (semester_name, start_date, end_date)
+        VALUES (#{semesterName}, #{startDate}, #{endDate})
     </insert>
 
     <update id="update" parameterType="org.example.model.Semester">

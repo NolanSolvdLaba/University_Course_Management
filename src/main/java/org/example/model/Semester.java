@@ -23,7 +23,7 @@ public class Semester {
 
     @XmlElement(name="semesterName")
     @JsonProperty("semesterName")
-    private String semesterName;
+    private SemesterName semesterName;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -34,10 +34,11 @@ public class Semester {
     private LocalDate endDate;
 
     public Semester(String semesterName, LocalDate startDate, LocalDate endDate) {
-        this.semesterName = semesterName;
+        this.semesterName = SemesterName.valueOf(semesterName.toUpperCase());
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
     public int getSemesterId() {
         return semesterId;
     }
@@ -46,11 +47,11 @@ public class Semester {
         this.semesterId = semesterId;
     }
 
-    public String getSemesterName() {
+    public SemesterName getSemesterName() {
         return semesterName;
     }
 
-    public void setSemesterName(String semesterName) {
+    public void setSemesterName(SemesterName semesterName) {
         this.semesterName = semesterName;
     }
 
@@ -78,5 +79,10 @@ public class Semester {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';
+    }
+
+    public enum SemesterName {
+        FALL,
+        SPRING
     }
 }

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.example.dao.CourseMapper">
+<mapper namespace="org.example.dao.ClassroomMapper">
 
     <!-- SELECT statement to retrieve a course by ID -->
     <select id="getById" parameterType="int" resultType="org.example.model.Course">
