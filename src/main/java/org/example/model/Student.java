@@ -23,6 +23,10 @@ public class Student extends User {
         this.departmentName = departmentName;
     }
 
+    public Student() {
+        super();
+    }
+
     public int getStudentId() {
         return studentId;
     }

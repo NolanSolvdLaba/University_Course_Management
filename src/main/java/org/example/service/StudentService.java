@@ -21,7 +21,6 @@ public class StudentService {
     }
 
 
-
     public void update(Student student) {
         studentMapper.update(student);
     }
@@ -33,4 +32,9 @@ public class StudentService {
     public List<Student> getAll() {
         return studentMapper.getAll();
     }
+
+    public Student getById(int studentId) {
+        return studentMapper.getById(studentId);
+    }
+
 }
